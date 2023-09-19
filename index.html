@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <!-- Header Section -->
+            <header class="heading">
+                <div class="title">ROCK <br> PAPER <br> SCISSORS</div>
+                <div class="score">
+                    <div class="computer-score">
+                        <div class="score-title">computer <br> score</div>
+                        <h1 id="comp-score">0</h1>
+                    </div>
+                    <div class="my-score">
+                        <div class="score-title">your <br> score</div>
+                        <h1 id="user-score">0</h1>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Hand Choice Section -->
+            <section class="hand-choice">
+                <div class="play-area">
+                    <div class="rock-btn choice-btn" id="rock" onclick="userPick('rock')">
+                        <img src="./assets/rock.svg" alt="rock">
+                    </div>
+                    <div class="scissor-btn choice-btn" onclick="userPick('scissor')">
+                        <img src="./assets/scissor.svg" alt="scissor">
+                    </div>
+                    <div class="paper-btn choice-btn" onclick="userPick('paper')">
+                        <img src="./assets/paper.svg" alt="paper">
+                    </div>
+
+                    <div class="triangle">
+                        <div class="lines">
+                            <div class="line1 line"></div>
+                            <div class="line2 line"></div>
+                            <div class="line3 line"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="action-btn">
+                <span class="btn" onclick="showRules()">RULES</span>
+                <span class="btn hidden" id="next-btn" onclick="winPage()">NEXT</span>
+            </div>
+
+            <!-- Contest Section (Hidden by default) -->
+            <div class="contest hidden">
+                <div class="boxes ring-1 win-ring">
+                    <div class="boxes ring-2 win-ring">
+                        <div class="boxes ring-3 win-ring">
+                            <div class="user">
+                                <p class="pick">YOU PICKED</p>
+                                <div class="hands" id="user-ring">
+                                    <img src="./assets/Paper.png" id="userChoice" alt="userChoice">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result">
+                    <div class="decision">
+                        <h1 id="win">YOU WIN </h1>
+                        <p id="tie">AGAINST PC</p>
+                    </div>
+                    <div class="newgame" onclick="restart()">PLAY AGAIN</div>
+                </div>
+                <div class="boxes ring-1 lost-ring">
+                    <div class="boxes ring-2 lost-ring">
+                        <div class="boxes ring-3 lost-ring">
+                            <div class="pc">
+                                <p class="pick">PC PICKED</p>
+                                <div class="hands pc-hand" id="pc-ring">
+                                    <img src="./assets/17911 1 (1).svg" id="pcChoice" alt="pcChoice">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Read Rules Section -->
+    <section class="read-rules">
+        <div class="rule-modal hidden">
+            <h3>GAMING RULES</h3>
+            <div class="close-btn" id="close-rule" onclick="closeRule()">
+                <img src="./assets/remove.png" alt="">
+            </div>
+            <ul class="rules">
+                <li>
+                    <div class="rule-list">
+                        <div class="bullets">
+                            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="8" height="8" fill="#FFD600"></rect>
+                            </svg>
+                        </div>
+                        <div class="rule-text">
+                            Rock beats scissors, scissors beat paper, and paper beats rock.
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="rule-list">
+                        <div class="bullets">
+                            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="8" height="8" fill="#FFD600"></rect>
+                            </svg>
+                        </div>
+                        <div class="rule-text">
+                            Agree ahead of time whether you’ll count off “rock, paper, scissors, shoot” or just “rock,
+                            paper, scissors.”
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="rule-list">
+                        <div class="bullets">
+                            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="8" height="8" fill="#FFD600"></rect>
+                            </svg>
+                        </div>
+                        <div class="rule-text">
+                            Use rock, paper, scissors to settle minor decisions or simply play to pass the time.
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="rule-list">
+                        <div class="bullets">
+                            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="8" height="8" fill="#FFD600"></rect>
+                            </svg>
+                        </div>
+                        <div class="rule-text">
+                            If both players lay down the same hand, each player lays down another hand.
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Won Game Section (Hidden by default) -->
+    <section class="hidden" id="won-game">
+        <div class="won-game-box">
+            <img src="./assets/stars.png" alt="stars" id="stars">
+            <img src="./assets/trophy.png" alt="VectorTrophy" id="trophy">
+            <h2 class="won-game-heading">HURRAY!!</h2>
+            <h6 class="won-game-sub-heading">YOU WON THE GAME</h6>
+            <div class="filled-btn large newgame" onclick="playAgain()">play again</div>
+            <div class="action-btn">
+                <span class="btn" onclick="showRules()">RULES</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>
